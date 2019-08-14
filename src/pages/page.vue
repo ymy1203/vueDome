@@ -35,7 +35,7 @@ export default{
       // 假设请求到的值
       var result = {
         data:{
-          name:"王珊",
+          name:"二狗",
           age:18,
           weight:180,
         }
