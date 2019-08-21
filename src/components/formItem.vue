@@ -5,11 +5,8 @@
     <input 
       v-if="item.type === 'input'" 
       type="text" 
-      v-model="item.pdata" 
-      @change="inputChange(item.inputChange)"
-      @blur="inputblur(item.inputblur)"
-      @focus="inputfocus(item.inputfocus)"
-      @input="inputInput(item.inputInput)"
+      v-model="vInput" 
+      @blur="onBlur()"
     >
     <div v-if="item.type === 'showText'">{{item.text}}</div>
   </div>
@@ -19,21 +16,27 @@
 <script>
 export default{
   props:{
-    item:Object
+    item:Object,
+    pdata:String
+  },
+  data(){
+    return{
+      vInput:""
+    }
+  },
+  updated(){
+    this.$parent[this.pdata] = this.vInput;
+  },
+  created(){
+    // this.vInput = this.item.pdata
   },
   methods:{
-    inputChange(cb){
-      if(cb) cb()
+    clear(){
+      this.vInput = ''
     },
-    inputblur(cb){
-      if(cb) cb()
+    onBlur(){
+      this.$emit("onBlur",this.vInput)
     },
-    inputfocus(cb){
-      if(cb) cb()
-    },
-    inputInput(cb){
-      if(cb) cb()
-    }
   }
 }
 </script>
